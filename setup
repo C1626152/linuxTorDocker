@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+NAMESPACE = "containerNameSpace"
+
+TOR = "tordockername"
+TOR_IP = "10.1.1.1/24"
+
+NGINX = "nginxname"
+NGINX_IP = "10.1.1.2/24"
+
+setup(){
+	#Add container namespaces to host system
+	ip netns add $NAMESPACE
+	#create tor/nginx virtual interfaces & make them talk to containers0 [also created]
+	ip link add tor0 type veth peer name containers0
+	ip link add nginx0 type veth peer name containers0
+	#add tor/nginx to namespace
+	ip link set tor0 netns $NAMESPACE
+	ip link set nginx0 netns $NAMESPACE
+	#set nginx/tor IP within namespace
+	ip netns exec $NAMESPACE ifconfig tor0 $TOR_IP up
+	ip netns exec $NAMESPACE ifconfig nginx $NGINX_IP up
+	#Set loopback addr to be a part of container namespace
+	ip link set dev lo0 netns $NAMESPACE
+	
+	#Spin up Nginx Container
+	docker run -d $NGINX | sudo tee -a out.txt
+	NGINX_ID = out.txt
+	wait ${NGINX_ID}
+	sudo rm -r out.txt
+
+	#throw an if loop in here somewhere for process validation when starting containers
+	#Spin up Tor container when done
+	docker run -d $TOR
+}
