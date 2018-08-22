@@ -1,24 +1,32 @@
 #!/usr/bin/env bash
 setup(){
-	echo -n "Please input Git username: "
-	read ans
-	GIT_UNAME=$ans
-	ans="*****"	
 	
-	./addVariables
-	./installDocker
-	./cloneGit
+	#prepare environment and dependencies
+	./setVariables.bin
+	cat .hidden/vars.txt | while read line; do
+	#ERROR ON BRACE EXPANSION CODE NESTED INSIDE FUNCTION
+		{$1..$8}=i
+	done
+
+	echo $1
+#	/installDocker.bin
+#	/cloneGit.bin
+
 	#Add container namespaces to host system
 	ip netns add $NAMESPACE
+	ip netns list
 	#create tor/nginx virtual interfaces & make them talk to containers0 [also created]
 	ip link add tor0 type veth peer name containers0
 	ip link add nginx0 type veth peer name containers0
+
 	#add tor/nginx to namespace
 	ip link set tor0 netns $NAMESPACE
 	ip link set nginx0 netns $NAMESPACE
+
 	#set nginx/tor IP within namespace
 	ip netns exec $NAMESPACE ifconfig tor0 $TOR_IP up
 	ip netns exec $NAMESPACE ifconfig nginx $NGINX_IP up
+
 	#Set loopback addr to be a part of container namespace
 	ip link set dev lo0 netns $NAMESPACE
 	
@@ -32,3 +40,13 @@ setup(){
 	#Spin up Tor container when done
 	docker run -d $TOR
 }
+
+if setup; then
+	echo "********************************************"
+	echo "This environment is set up and running okay!"
+	echo "********************************************"
+else
+	echo"*******************************************************************"
+	echo"Setup error! Refer to other error messages for troubleshooting help"
+	echo"*******************************************************************"
+fi

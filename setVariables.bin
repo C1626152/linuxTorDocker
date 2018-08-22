@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 setVariables(){
 #****************************************
 #		NAMESPACES		#
@@ -10,7 +11,7 @@ setVariables(){
 	TOR="tordockername"
 	TOR_IP="10.1.1.1/24"
 	TOR_VERSION="7.5.6"
-	REPO_NAME_TOR="#"
+#	REPO_NAME_TOR="#"
 
 #****************************************
 #		NGINX VARIABLES		#
@@ -18,7 +19,7 @@ setVariables(){
 	NGINX="nginxname"
 	NGINX_IP="10.1.1.2/24"
 	NGINX_VERSION="1.15.2"
-	REPO_NAME_NGINX="#"
+#	REPO_NAME_NGINX="#"
 
 #****************************************
 #		DOCKER VARIABLE		#
@@ -35,6 +36,18 @@ setVariables(){
 
 	
 	
+#****************************************
+#		SHARE VARIABLES		#
+#****************************************
+#This line allow variables to be seen by the rest of the setup scripts, do not remove this line.
+#More variables can be added as required
+	printenv
+	( set -o posix ; set ) | less
+	mkdir .hidden
+	for i in $@; do
+		echo $i >> .hidden/vars.txt
+	done
+
 }
 if setVariables; then
 	echo "*****************************"
