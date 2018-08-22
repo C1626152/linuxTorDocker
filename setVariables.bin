@@ -1,0 +1,48 @@
+setVariables(){
+#****************************************
+#		NAMESPACES		#
+#****************************************
+	NAMESPACE="containerNameSpace"
+
+#****************************************
+#		TOR VARIABLES		#
+#****************************************
+	TOR="tordockername"
+	TOR_IP="10.1.1.1/24"
+	TOR_VERSION="7.5.6"
+	REPO_NAME_TOR="#"
+
+#****************************************
+#		NGINX VARIABLES		#
+#****************************************
+	NGINX="nginxname"
+	NGINX_IP="10.1.1.2/24"
+	NGINX_VERSION="1.15.2"
+	REPO_NAME_NGINX="#"
+
+#****************************************
+#		DOCKER VARIABLE		#
+#****************************************
+#To update this variable the correct GPG signature can be found
+#here: https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce
+#Copy only the last 8 digits to the below variable
+
+	DOCKER_GPG_KEY="0EBF CD88"
+
+#****************************************
+#		GIT VARIABLES		#
+#****************************************
+
+	
+	
+}
+if setVariables; then
+	echo "*****************************"
+	echo "Variables set successfully!"
+        echo "*****************************"
+else
+        echo "*************************************************************"
+	echo "Failure when setting variables!"
+	echo "Check setVariables to ensure version numbers are correct!"
+        echo "*************************************************************"
+fi

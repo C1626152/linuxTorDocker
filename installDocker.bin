@@ -1,0 +1,39 @@
+#! /usr/bin/env bash
+
+installDocker(){
+	#Remove old versions
+	$ sudo apt-get remove docker docker-engine docker.io
+	#update repo & upgrade
+	sudo apt-get update
+	sudo apt-get -y upgrade
+	#download new version of docker
+	sudo apt-get install \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	software-properties-common
+
+	#add dockers official gpg key
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	#Verify fingerprint
+	sudo apt-key finderprint $DOCKER_GPG_KEY
+
+	#set up the stable repository
+	sudo add-apt-repository \
+	"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+	$(lsb_release -cs) \
+	stable"
+
+	#Install docker
+	sudo apt-get install docker-ce
+}
+
+if installDocker; then
+	echo "************************************************"
+	echo "Docker installed correctly!"
+	echo "************************************************"
+else
+	echo "************************************************"
+	echo "Docker install failed"
+	echo "************************************************"
+fi

@@ -1,0 +1,21 @@
+#Set up user credential varification for git clones
+
+cloneGit(){
+	#check for git
+	if git --version; then
+		echo "Git is installed"
+		git config --global user.name $GIT_UNAME
+		sudo git clone https:www.github.com/${REPO_NAME_TOR}.git --quiet
+		sudo git clone https:www.github.com/${REPO_NAME_NGINX}.git --quiet
+	else
+		sudo apt-get install git
+                sudo git clone https:www.github.com/${REPO_NAME_TOR}.git --quiet
+                sudo git clone https:www.github.com/${REPO_NAME_NGINX}.git --quiet
+	fi
+}
+if cloneGit; then
+	echo "git is successfully configured"
+else
+	echo "Error configuring git"
+	echo "Check cloneGit for errors"
+fi

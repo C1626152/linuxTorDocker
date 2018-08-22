@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-NAMESPACE = "containerNameSpace"
-
-TOR = "tordockername"
-TOR_IP = "10.1.1.1/24"
-
-NGINX = "nginxname"
-NGINX_IP = "10.1.1.2/24"
-
 setup(){
+	echo -n "Please input Git username: "
+	read ans
+	GIT_UNAME=$ans
+	ans="*****"	
+	
+	./addVariables
+	./installDocker
+	./cloneGit
 	#Add container namespaces to host system
 	ip netns add $NAMESPACE
 	#create tor/nginx virtual interfaces & make them talk to containers0 [also created]
