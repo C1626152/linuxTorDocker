@@ -2,17 +2,11 @@
 setup(){
 	
 	#prepare environment and dependencies
-	./setVariables.bin
-	cat .hidden/vars.txt | while read line; do
-	#ERROR ON BRACE EXPANSION CODE NESTED INSIDE FUNCTION
-		{$1..$8}=i
-	done
-
-	echo $1
-#	/installDocker.bin
-#	/cloneGit.bin
+#	./installDocker.bin
+#	./cloneGit.bin
 
 	#Add container namespaces to host system
+	echo "${NAMESPACE} is the namespace!"
 	ip netns add $NAMESPACE
 	ip netns list
 	#create tor/nginx virtual interfaces & make them talk to containers0 [also created]
@@ -31,14 +25,16 @@ setup(){
 	ip link set dev lo0 netns $NAMESPACE
 	
 	#Spin up Nginx Container
-	docker run -d $NGINX | sudo tee -a out.txt
+	docker run -du $NGINX -p 8080:80 ${SPLASHSCREEN}| sudo tee -a out.txt
 	NGINX_ID = out.txt
 	wait ${NGINX_ID}
 	sudo rm -r out.txt
 
 	#throw an if loop in here somewhere for process validation when starting containers
 	#Spin up Tor container when done
-	docker run -d $TOR
+	docker run -du -p 8118:8118 -p 9050:9050 $TOR
+	curl --proxy localhost:8118 https://www.duckduckgo.com
+
 }
 
 if setup; then
