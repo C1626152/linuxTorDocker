@@ -3,22 +3,22 @@ setVariables(){
 #****************************************
 #		NAMESPACES		#
 #****************************************
-	NAMESPACE="containerNameSpace"
+	export NAMESPACE="containerNameSpace"
 
 #****************************************
 #		TOR VARIABLES		#
 #****************************************
-	TOR="tordockername"
-	TOR_IP="10.1.1.1/24"
-	TOR_VERSION="7.5.6"
+	export TOR="DTPA"
+	export TOR_IP="10.1.1.1/24"
+	export TOR_VERSION="7.5.6"
 #	REPO_NAME_TOR="#"
 
 #****************************************
 #		NGINX VARIABLES		#
 #****************************************
-	NGINX="nginxname"
-	NGINX_IP="10.1.1.2/24"
-	NGINX_VERSION="1.15.2"
+	export NGINX="DA"
+	export NGINX_IP="10.1.1.2/24"
+	export NGINX_VERSION="1.15.2"
 #	REPO_NAME_NGINX="#"
 
 #****************************************
@@ -28,27 +28,17 @@ setVariables(){
 #here: https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce
 #Copy only the last 8 digits to the below variable
 
-	DOCKER_GPG_KEY="0EBF CD88"
+	export DOCKER_GPG_KEY="0EBF CD88"
 
 #****************************************
-#		GIT VARIABLES		#
+#		SPLASH SCREEN VARIABLES	#
 #****************************************
+	export SPLASHSCREEN="https://www.duckduckgo.com"
 
-	
-	
-#****************************************
-#		SHARE VARIABLES		#
-#****************************************
-#This line allow variables to be seen by the rest of the setup scripts, do not remove this line.
-#More variables can be added as required
-	printenv
-	( set -o posix ; set ) | less
-	mkdir .hidden
-	for i in $@; do
-		echo $i >> .hidden/vars.txt
-	done
 
 }
+
+
 if setVariables; then
 	echo "*****************************"
 	echo "Variables set successfully!"
@@ -59,3 +49,5 @@ else
 	echo "Check setVariables to ensure version numbers are correct!"
         echo "*************************************************************"
 fi
+#Run setup as child process to keep variables as part of parent tree
+./setup
