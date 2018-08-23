@@ -4,6 +4,8 @@ setVariables(){
 #		NAMESPACES		#
 #****************************************
 	export NAMESPACE="containerNameSpace"
+	export TOR_NAMESPACE="someTorNameSpace"
+	export NGINX_NAMESPACE="someNginxNameSpace"
 
 #****************************************
 #		TOR VARIABLES		#
@@ -11,7 +13,6 @@ setVariables(){
 	export TOR="DTPA"
 	export TOR_IP="10.1.1.1/24"
 	export TOR_VERSION="7.5.6"
-#	REPO_NAME_TOR="#"
 
 #****************************************
 #		NGINX VARIABLES		#
@@ -19,7 +20,6 @@ setVariables(){
 	export NGINX="DA"
 	export NGINX_IP="10.1.1.2/24"
 	export NGINX_VERSION="1.15.2"
-#	REPO_NAME_NGINX="#"
 
 #****************************************
 #		DOCKER VARIABLE		#
@@ -35,7 +35,10 @@ setVariables(){
 #****************************************
 	export SPLASHSCREEN="https://www.duckduckgo.com"
 
-
+#****************************************
+#		GIT VARIABLES		#
+#****************************************
+	export REPO_NAME="someGitRepo"
 }
 
 
