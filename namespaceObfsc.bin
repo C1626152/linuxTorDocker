@@ -1,0 +1,21 @@
+#! usr/bin/env bash
+#Script to obfusicate the namespaces used by the containers
+
+	#Add container namespaces to host system
+	echo "${NAMESPACE} is the namespace!"
+	ip netns add $NAMESPACE
+	ip netns list
+	#create tor/nginx virtual interfaces & make them talk to containers0 [also created]
+	ip link add tor0 type veth peer name containers0
+	ip link add nginx0 type veth peer name containers0
+
+	#add tor/nginx to namespace
+	ip link set tor0 netns $NAMESPACE
+	ip link set nginx0 netns $NAMESPACE
+
+	#set nginx/tor IP within namespace
+	ip netns exec $NAMESPACE ifconfig tor0 $TOR_IP up
+	ip netns exec $NAMESPACE ifconfig nginx $NGINX_IP up
+
+	#Set loopback addr to be a part of container namespace
+	ip link set dev lo0 netns $NAMESPACE

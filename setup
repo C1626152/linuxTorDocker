@@ -25,16 +25,17 @@ setup(){
 	ip link set dev lo0 netns $NAMESPACE
 	
 	#Spin up Nginx Container
-	docker run -du $NGINX -p 8080:80 ${SPLASHSCREEN}| sudo tee -a out.txt
+	docker run -d $NGINX -p 8080:80 ${SPLASHSCREEN}| sudo tee -a out.txt -u
 	NGINX_ID = out.txt
 	wait ${NGINX_ID}
 	sudo rm -r out.txt
 
 	#throw an if loop in here somewhere for process validation when starting containers
 	#Spin up Tor container when done
-	docker run -du -p 8118:8118 -p 9050:9050 $TOR
+	docker run -d $TOR -p 8118:8118 -p 9050:9050 -u
 	curl --proxy localhost:8118 https://www.duckduckgo.com
 
+	echo "${TOR} is a testprint of variables"
 }
 
 if setup; then
