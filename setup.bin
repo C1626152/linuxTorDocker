@@ -53,4 +53,4 @@ else
         echo "*************************************************************"
 fi
 #Run setup as child process to keep variables as part of parent tree
-./setup
+./systemPrepare.bin
