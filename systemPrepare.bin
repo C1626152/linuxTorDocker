@@ -5,6 +5,7 @@ setup(){
 #	./installDocker.bin
 #	./cloneGit.bin
 # 	./namespaceObfsc.bin
+	./imageBuild.bin
 
 	#Spin up Nginx Container
 	#This code needs a better loop execution
@@ -18,7 +19,7 @@ setup(){
 
 	#throw an if loop in here somewhere for process validation when starting containers
 	#Spin up Tor container when done
-	docker run -d $TOR -p 8118:8118 -p 9050:9050 -u
+	docker run -p 8118:8118 -p 9050:9050 -d ${TOR} -u
 	curl --proxy localhost:8118 https://www.duckduckgo.com
 
 	echo "${TOR} is a testprint of variables"

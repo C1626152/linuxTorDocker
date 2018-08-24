@@ -10,14 +10,16 @@ setVariables(){
 #****************************************
 #		TOR VARIABLES		#
 #****************************************
-	export TOR="DTPA"
+	export TORb="DTPA"
+	export TOR="dtpa"
 	export TOR_IP="10.1.1.1/24"
 	export TOR_VERSION="7.5.6"
 
 #****************************************
 #		NGINX VARIABLES		#
 #****************************************
-	export NGINX="DA"
+	export NGINXb="DN"
+	export NGINX="dn"
 	export NGINX_IP="10.1.1.2/24"
 	export NGINX_VERSION="1.15.2"
 
