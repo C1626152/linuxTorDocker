@@ -5,7 +5,7 @@ setup(){
 #	./installDocker.bin
 #	./cloneGit.bin
 # 	./namespaceObfsc.bin
-	./imageBuild.bin
+#	./imageBuild.bin
 
 	#Spin up Nginx Container
 	#This code needs a better loop execution

@@ -4,6 +4,8 @@ Linuxtordocker
 	-Networking between containers needs to be set up between containers
 	-systemPrepare.bin needs finishing
 		-Script must launch tor container then {wait} for the process to finish and launch NGINX (probably in that order for reverse proxy to work)
+	-imageBuild needs fixing, I think errors are being caused by the variables used
+	-namespaceObfsc.bin requires finishing so the namespaces of each process are isolated from the remainder of the system namespaces, this mitigates security risks related to container breakout.
 	-Memory container add-on (Redis?)
 	-versions of tor, privoxy and NGINX should self verify
 	-add in automatic versioning
