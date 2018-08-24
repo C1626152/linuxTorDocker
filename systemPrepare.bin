@@ -7,10 +7,13 @@ setup(){
 # 	./namespaceObfsc.bin
 
 	#Spin up Nginx Container
-	docker run -d $NGINX -p 8080:80 ${SPLASHSCREEN}| sudo tee -a out.txt -u
-	NGINX_ID = out.txt
+	########This code causes errors##########
+	sudo docker run -d ${NGINX}| sudo tee -a out.txt
+	#THIS CODE CAN THROW ERRORS: ${SPLASHSCREEN} -p 8080:80 
+	$NGINX_ID<out.txt
 	wait ${NGINX_ID}
 	sudo rm -r out.txt
+	#########################################
 
 	#throw an if loop in here somewhere for process validation when starting containers
 	#Spin up Tor container when done

@@ -2,7 +2,7 @@
 
 installDocker(){
 	#Remove old versions
-	$ sudo apt-get remove docker docker-engine docker.io
+	sudo apt-get remove docker docker-engine docker.io
 	#update repo & upgrade
 	sudo apt-get update
 	sudo apt-get -y upgrade

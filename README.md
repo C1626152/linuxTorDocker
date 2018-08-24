@@ -36,3 +36,8 @@ user@UbuntuMachine $ sudo vi setup.bin
 	-Using tor this way allows users to connect to the host machine using ssh and use a web browser of their choosing
 
 
+##MODULARITY
+
+The best part of this build is that the docker ecosystem allows for easy modularity. In order to help *you* with the modularity of this system I will show you the parts of the code that require your editing to work with new containers. I can't help with the containers being added, but I can show you how this system works.
+
+The first requirement is to edit the DN .config file, first navigate to the file located in ```/DN/nginx.conf```. Then 
