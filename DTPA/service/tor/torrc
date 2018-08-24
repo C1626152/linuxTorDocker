@@ -1,17 +1,29 @@
 ##Custom torrc file built by Chloe to run with linuxTorDocker
 ##Contact C1626152@github.com with errors
 
+#############################################################################
+#	CODE ERRORS: 							    #
+#	This torrc file contains 'some' code that is causing a fatal error  #
+#	when the container starts. Probably `SOCKSPORT 0.0.0.0:9050` as this#
+#	line is displayed in the docker log for the container when it starts#
+#	or a user connects to the container. If this is not the cause of the#
+#	error then the probable cause is the privoxy config settings which  #
+#	otherwise throw an unrecoverable error (possibly by binding to      #
+#	SOCKSPORT 0.0.0.0:9050 before tor can) 				    #
+# 									    #
+#############################################################################
+
 
 ## Tor opens a SOCKS proxy on port 9050 by default -- even if you don't
 ## configure one below. Set "SOCKSPort 0" if you plan to run Tor only
 ## as a relay, and not make any local application connections yourself.
-SOCKSPort 9050 # Default: Bind to localhost:9050 for local connections.
+SOCKSPort 0.0.0.0:9050 # Default: Bind to localhost:9050 for local connections.
 #SOCKSPort 192.168.0.1:9100 # Bind to this address:port too.
 
 ## Uncomment this to start the process in the background... or use
 ## --runasdaemon 1 on the command line. This is ignored on Windows;
 ## see the FAQ entry if you want Tor to run as an NT service.
-RunAsDaemon 1
+#RunAsDaemon 1
 
 ############### This section is just for location-hidden services ###
 
