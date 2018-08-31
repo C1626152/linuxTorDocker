@@ -50,7 +50,7 @@ Nickname docktor
 
 ## Uncomment this if you do *not* want your relay to allow any exit traffic.
 ## (Relays allow exit traffic by default.)
-ExitRelay 0
+#ExitRelay 0
 
 
-HTTPSProxy 0.0.0.0:2177
+#HTTPSProxy 0.0.0.0:2177

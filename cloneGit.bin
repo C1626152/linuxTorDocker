@@ -15,5 +15,6 @@ if cloneGit; then
 	echo "git is successfully configured"
 else
 	echo "Error configuring git"
-	echo "Check cloneGit for errors"
+	echo "Check you have configured the repo name correctly"
+	echo "...Skipping git clone..."
 fi

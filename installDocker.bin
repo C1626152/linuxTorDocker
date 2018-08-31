@@ -25,7 +25,9 @@ installDocker(){
 	stable"
 
 	#Install docker
-	sudo apt-get install docker-ce
+	sudo apt-get install docker-ce \
+	sudo rm -r /var/run/docker.pidlea \
+	sudo dockerd --userns-remap="anon:anon"
 }
 
 if installDocker; then

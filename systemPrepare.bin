@@ -1,28 +1,26 @@
 #!/usr/bin/env bash
 setup(){
-	
+	adduser anon --disabled-password \
 	#prepare environment and dependencies
-#	./installDocker.bin
-#	./cloneGit.bin
-# 	./namespaceObfsc.bin
+	./installDocker.bin
+	./cloneGit.bin
 	./imageBuild.bin
 
 	#Spin up Nginx Container
+	docker run -p 8080:80 ${NGINX}
 	#This code needs a better loop execution
-	########This code causes errors##########
-	#sudo docker run -d ${NGINX}| sudo tee -a out.txt
-	#THIS CODE CAN THROW ERRORS: ${SPLASHSCREEN} -p 8080:80 
-	#$NGINX_ID<out.txt
-	#wait ${NGINX_ID}
-	#sudo rm -r out.txt
-	#########################################
+	########This code can cause errors##########
+	#wait $!
+	############################################
 
 	#throw an if loop in here somewhere for process validation when starting containers
 	#Spin up Tor container when done
 	docker run -p 8118:8118 -p 9050:9050 -d ${TOR} -u
-	curl --proxy localhost:8118 https://www.duckduckgo.com
+	curl --proxy localhost:8118 ${SPLASHSCREEN}
 
-	echo "${TOR} is a testprint of variables"
+	#Logs user in as anon to prevent tampering with system following set-up
+	#su anon
+
 }
 
 if setup; then

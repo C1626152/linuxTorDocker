@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 setVariables(){
 #****************************************
-#		NAMESPACES		#
-#****************************************
-	export NAMESPACE="containerNameSpace"
-	export TOR_NAMESPACE="someTorNameSpace"
-	export NGINX_NAMESPACE="someNginxNameSpace"
-
-#****************************************
 #		TOR VARIABLES		#
 #****************************************
 	export TORb="DTPA"
@@ -35,12 +28,16 @@ setVariables(){
 #****************************************
 #		SPLASH SCREEN VARIABLES	#
 #****************************************
+	#This splashscreen is here to be used for re-directs to a home page.
+	#duckduckgo.com is currently a placeholder
 	export SPLASHSCREEN="https://www.duckduckgo.com"
 
 #****************************************
 #		GIT VARIABLES		#
 #****************************************
+#Place your git repo name here to automatically clone from git (allows system to be lightweight
 	export REPO_NAME="someGitRepo"
+
 }
 
 

@@ -1,6 +1,0 @@
-imageBuild(){
-
-	sudo docker build $NGINXb -t "$NGINX"
-	sudo docker build $TORb -t "$TOR"
-
-}
