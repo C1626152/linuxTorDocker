@@ -17,8 +17,10 @@
 ## Tor opens a SOCKS proxy on port 9050 by default -- even if you don't
 ## configure one below. Set "SOCKSPort 0" if you plan to run Tor only
 ## as a relay, and not make any local application connections yourself.
-SOCKSPort 0.0.0.0:9050 # Default: Bind to localhost:9050 for local connections.
 #SOCKSPort 192.168.0.1:9100 # Bind to this address:port too.
+
+SOCKSPort 0.0.0.0:9050 # Default: Bind to localhost:9050 for local connections.
+
 
 ## Uncomment this to start the process in the background... or use
 ## --runasdaemon 1 on the command line. This is ignored on Windows;
@@ -52,5 +54,10 @@ Nickname docktor
 ## (Relays allow exit traffic by default.)
 #ExitRelay 0
 
+<<<<<<< HEAD
 
 #HTTPSProxy 0.0.0.0:2177
+=======
+#Work out how to correctly use this option to act as a https proxy also. May not be necessary as Tor can handle SOCKS5 traffic from Privoxy
+HTTPSProxy 0.0.0.0:2177
+>>>>>>> e32c09320aa6fcd8d17bdd938a98eb0a45a83e22

@@ -1,0 +1,35 @@
+To complete:
+
+Linuxtordocker
+	-Networking between containers needs to be set up between containers
+	-systemPrepare.bin needs finishing
+		-Script must launch tor container then {wait} for the process to finish and launch NGINX (probably in that order for reverse proxy to work)
+	-imageBuild needs fixing, I think errors are being caused by the variables used
+	-namespaceObfsc.bin requires finishing so the namespaces of each process are isolated from the remainder of the system namespaces, this mitigates security risks related to container breakout.
+	-Memory container add-on (Redis?)
+	-versions of tor, privoxy and NGINX should self verify
+	-add in automatic versioning
+	-Lisences
+	-Network diagram
+	-README.md
+		-User guide
+		-Troubleshooting
+		-expansion guide
+================================================================================================
+Tor
+	-torrc - Needs configuring correctly to handle traffic remotely through privoxy
+	-torrc also requires editing to handle forwarding correctly
+
+Privoxy
+	-Translate http >> SOCKS5 traffic
+		-edit config file
+
+NGINX
+	-Reverse proxy settings need tying into docker bridges
+	-Need to consider adding SOCKS5 support (not necessary though)
+	-Turn off content cacheing
+	-set up file handling for memory expansion
+
+Redis
+	-Investigate useability of Redis for memory support module and possible method of transfering memory
+	-Investigate security of using Redis to store items in non-contigeous memory, possible issue relating to memory addresses?

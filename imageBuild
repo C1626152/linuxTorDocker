@@ -1,0 +1,15 @@
+imageBuild(){
+
+	sudo docker build $NGINXb -t "$NGINX"
+	sudo docker build $TORb -t "$TOR"
+
+}
+if imageBuild; then
+	echo ********************************
+	echo 	Images built successfully
+	echo ********************************
+else
+	echo ************************************
+	echo 	CRITICAL ERROR BUILDING IMAGE
+	echo ************************************
+fi

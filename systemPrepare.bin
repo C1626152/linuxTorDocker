@@ -2,9 +2,16 @@
 setup(){
 	adduser anon --disabled-password \
 	#prepare environment and dependencies
+<<<<<<< HEAD
 	./installDocker.bin
 	./cloneGit.bin
 	./imageBuild.bin
+=======
+#	./installDocker.bin
+#	./cloneGit.bin
+# 	./namespaceObfsc.bin
+#	./imageBuild.bin
+>>>>>>> e32c09320aa6fcd8d17bdd938a98eb0a45a83e22
 
 	#Spin up Nginx Container
 	docker run -p 8080:80 ${NGINX}
