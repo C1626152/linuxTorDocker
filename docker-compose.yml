@@ -1,0 +1,36 @@
+version: '3.3'
+services:
+  dtpa:
+    build:
+      context: ./DTPA 
+      dockerfile: Dockerfile
+    working_dir: /home/ 
+    volumes:
+      - "/var/run/docker"
+    expose: 
+      - "8118"
+      - "9050"
+    networks:
+      hostnet: {}
+    configs:
+      - uid: "1001"
+    container_name: Tor
+
+  dn:
+    build:
+      context: ./DN
+      dockerfile: Dockerfile
+    working_dir: /home/
+    expose:
+      - "8080"
+    links:
+      - dtpa
+    networks:
+      hostnet: {}
+    configs:
+      - uid: "1001"
+    container_name: Nginx
+
+networks:
+  hostnet:
+    external: false

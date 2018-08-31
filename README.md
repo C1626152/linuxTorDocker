@@ -16,12 +16,12 @@ Make sure the versions you want to use are available and in date. This script do
 Clone the repo or place the file structure into the desired file location then use the following command:
 
 ```
-User@UbuntuMachine $ ./setup.bin
+User@UbuntuMachine$ ./setup.bin
 ```
 To set variables when an update is released:
 
 ```
-user@UbuntuMachine $ sudo vi setup.bin
+user@UbuntuMachine$ sudo vi setup.bin
 ```
 
 ##BOOT ORDER:
@@ -40,4 +40,22 @@ user@UbuntuMachine $ sudo vi setup.bin
 
 The best part of this build is that the docker ecosystem allows for easy modularity. In order to help *you* with the modularity of this system I will show you the parts of the code that require your editing to work with new containers. I can't help with the containers being added, but I can show you how this system works.
 
-The first requirement is to edit the DN .config file, first navigate to the file located in ```/DN/nginx.conf```. Then 
+The first requirement is to edit the DN .config file, first navigate to the file located in ```/DN/nginx.conf```.
+
+
+##To be completed:
+Currently the system has many working parts, but few that successfully interact with each other. DTPA (Tor/privoxy container) and DN (Nginx container) work independently, but I have been unable to get them to successfully network with eachother, this is due to issues with Nginx's config file (```DN/nginx.conf```), Privoxys config file (```DTPA/services/privoxy/privoxy.conf```) and Tors torrc file (```DTPA/services/tor/torrc```). These files require a networking configuration I simply have not been able to implement as of yet.
+
+The last two issues with this program as it is, it requires a web browser to install on the host machine so that users accessing it may be able to browse the tor network when connected; it must also install a VNC client on the host machine so that users may connect to it from a windows environment without issue.
+
+###Breakdown of issue:
+	-docker-compose.yml must be written into the ```systemPrepare.bin``` file so the system can be booted up with the correct configuration every time.
+		-Because of this some files require removal (eg:```imageBuild.bin```). The idea of the docker-compose file is that it should replace all files associated with docker building or running a container.
+	-Nginx must be configured as a reverse proxy so it can pass data to the relevant service. In the case of tor it must route all http/https traffic to the waiting privoxy socket [8118].
+	-Nginx should have cacheing turned off.
+	-Privoxy must be configured to convert http/https traffic into SOCKS5 (see documentation for privoxy)
+	-Tor must have the correct configuration, including setting exit node status to 0
+	-Browser must be installed
+	-VNC must be implemented on the system
+
+
